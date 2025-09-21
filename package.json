@@ -1,0 +1,15 @@
+{
+  "name": "golddigger-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "\"Gold trading application\"",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "author": "Nghia Phan",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^24.8.0"
+  }
+}
