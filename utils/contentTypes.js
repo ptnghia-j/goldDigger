@@ -13,5 +13,7 @@ export function getContentType(ext) {
     // Add more content types as needed
   }
 
-  return contentTypes[ext.toLowerCase()] || 'text/html';
+  // Remove the leading dot from extension if present
+  const cleanExt = ext.startsWith('.') ? ext.slice(1) : ext;
+  return contentTypes[cleanExt.toLowerCase()] || 'text/html';
 }
