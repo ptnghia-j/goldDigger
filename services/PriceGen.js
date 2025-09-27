@@ -7,7 +7,7 @@ class PriceGenerator {
   }
 
   /*
-  Generate price based on last price + change
+  Using weighted moving average to generate price
   Change = 0.5 * maxChange * (randomFactor + trend)
   where maxChange = lastPrice * volatility, volatility = 0.02
         randomFactor = random number between -1 and 1
