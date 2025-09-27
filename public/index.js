@@ -51,7 +51,7 @@ form.addEventListener('submit', (e) => {
 async function processPurchase(amount) {
   try {
     investBtn.textContent = 'Processing...';
-    investBtn.disable = true;
+    investBtn.disabled = true;
 
     const response = await fetch('/api/purchase', {
       method: 'POST', 
