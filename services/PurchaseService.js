@@ -36,7 +36,7 @@ class PurchaseService {
 
     try {
       await fs.appendFile(config.PURCHASES_LOG, logEntry);
-      console.log( `Purchase logged: ${purchase.transactionId}`)
+      console.log(`Purchase logged: ${purchase.transactionId}`)
     }
     catch (error) {
       console.error('Failed to log purchase: ', error);
