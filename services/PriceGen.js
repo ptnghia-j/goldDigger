@@ -1,9 +1,10 @@
+import config from '../config.js';
 class PriceGenerator {
   constructor() {
-    this.basePrice = 2000;
+    this.basePrice = config.PRICE.BASE;
     this.lastPrice = this.basePrice;
     this.trend = 0;
-    this.volatility = 0.02;
+    this.volatility = config.PRICE.VOLATILITY;
   }
 
   /*
@@ -16,14 +17,14 @@ class PriceGenerator {
 
   generatePrice() {
     const randomFactor = (Math.random() - 0.5) * 2;
-    this.trend = this.trend * 0.7 + randomFactor * 0.3;
+    this.trend = this.trend * config.PRICE.ALPHA + randomFactor * (1 - config.PRICE.ALPHA);
 
     const maxChange = this.lastPrice * this.volatility;
     const priceChange = 0.5 * maxChange * (randomFactor + this.trend);
     let newPrice = this.lastPrice + priceChange;
 
-    const minPrice = this.basePrice * 0.8;
-    const maxPrice = this.basePrice * 1.2;
+    const minPrice = this.basePrice * config.PRICE.MIN_RATIO;
+    const maxPrice = this.basePrice * config.PRICE.MAX_RATIO;
     newPrice = Math.max(minPrice, Math.min(maxPrice, newPrice));
 
     this.lastPrice = newPrice;

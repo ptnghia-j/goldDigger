@@ -1,3 +1,5 @@
+import config from '../config.js';
+
 export function validatePurchase(data) {
   if (!data?.amount) 
     return { isValid: false, error: 'Amount required' };
@@ -7,10 +9,10 @@ export function validatePurchase(data) {
   if (isNaN(amount) || amount <= 0)
     return { isValid: false, error: 'Amount must be a positive number' }
 
-  if (amount < 10) 
+  if (amount < config.PURCHASE.MIN_AMOUNT) 
     return { isValid: false, error: 'Minimum amount is £10' };
 
-  if (amount > 100000) 
+  if (amount > config.PURCHASE.MAX_AMOUNT) 
     return { isValid: false, error: 'Maximum amount is £100,000' };
 
   return { isValid: true };

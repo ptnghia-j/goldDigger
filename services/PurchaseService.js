@@ -1,15 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import priceGenerator from './PriceGen.js';
-
-const __dirname = import.meta.dirname;
-const LOGS_DIR = path.join(__dirname, '..', 'logs');
-const PURCHASES_LOG = path.join(LOGS_DIR, 'purchases.txt');
+import config from '../config.js';
 
 class PurchaseService {
   async ensureLogsDir() {
     try {
-      await fs.mkdir(LOGS_DIR, { recursive: true });
+      await fs.mkdir(config.LOGS_DIR, { recursive: true });
     }
     catch (error) {
       console.error('Error creating logs directory:', error);
@@ -38,8 +35,8 @@ class PurchaseService {
     const logEntry = `${purchase.timestamp}, amount paid: £${purchase.amount}, price per oz: £${purchase.pricePerOz}, gold sold: ${purchase.goldAmount} oz \n`;
 
     try {
-      await fs.appendFile(PURCHASES_LOG, logEntry);
-      console.log( `Purchase logged: ${purchase.transactionId}`)
+      await fs.appendFile(config.PURCHASES_LOG, logEntry);
+      console.log(`Purchase logged: ${purchase.transactionId}`)
     }
     catch (error) {
       console.error('Failed to log purchase: ', error);
